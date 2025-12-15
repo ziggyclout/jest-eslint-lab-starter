@@ -6,9 +6,13 @@
  * @param {string} input - The input string.
  * @returns {string} - The formatted string.
  */
-function capitalizeWords(input) {
-    return input.replace(/\b\w/g, char => char.toUpperCase());
+function capitalizeWords(str) {
+  if (!str) return "";
+
+  return str[0].toUpperCase() + str.slice(1);
 }
+
+
 
 /**
  * Filters active users from the array.
@@ -25,9 +29,19 @@ function filterActiveUsers(users) {
  * @param {string} username - The name of the user.
  * @returns {string} - The log message.
  */
-function logAction(action, username) {
-    const timestamp = new Date().toISOString();
-    return `User ${username} performed ${action} at ${timestamp}`;
+function logAction(action = "", username = "") {
+  const timestamp = new Date().toISOString();
+
+  const userPart = username ? `User ${username}` : "User";
+  const actionPart = action ? `performed ${action}` : "performed";
+
+  return `${userPart} ${actionPart} at ${timestamp}`;
 }
+
+
+
+
+
+
 
 module.exports = { capitalizeWords, filterActiveUsers, logAction };

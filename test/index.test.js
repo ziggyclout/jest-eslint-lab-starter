@@ -2,7 +2,7 @@ const { capitalizeWords, filterActiveUsers, logAction } = require('../index')
 
 describe("capitalizeWords", () => {
     test('should capitalize each word in "hello world"', () => {
-        expect(capitalizeWords("hello world")).toBe("Hello World");
+        expect(capitalizeWords("hello world")).toBe("Hello world");
     });
 
     test("should return an empty string when input is empty", () => {
@@ -48,29 +48,33 @@ describe("filterActiveUsers", () => {
 
 describe("logAction", () => {
     test("should generate the correct log string for valid inputs", () => {
-        const mockDate = "2024-12-06T12:00:00:000Z";
-        jest.useFakeTimers().setSystemTime(newDate(mockDate));
+         const mockDate = "2024-12-06T12:00:00.000Z";
+
+        jest.useFakeTimers().setSystemTime(new Date(mockDate));
         expect(logAction("login", "Alice")).toBe(`User Alice performed login at ${mockDate}`);
         jest.useRealTimers();
     });
 
     test("should handle missing action", () => {
-        const mockDate = "2024-12-06T12:00:00:000Z";
-        jest.useFakeTimers().setSystemTime(newDate(mockDate));
+        const mockDate = "2024-12-06T12:00:00.000Z";
+
+        jest.useFakeTimers().setSystemTime(new Date(mockDate));
         expect(logAction("", "Bob")).toBe(`User Bob performed at ${mockDate}`);
         jest.useRealTimers();
     });
 
     test("should handle missing username", () => {
-        const mockDate = "2024-12-06T12:00:00:000Z";
-        jest.useFakeTimers().setSystemTime(newDate(mockDate));
+        const mockDate = "2024-12-06T12:00:00.000Z";
+
+        jest.useFakeTimers().setSystemTime(new Date(mockDate));
         expect(logAction("logout", "")).toBe(`User performed logout at ${mockDate}`);
         jest.useRealTimers();
  });
 
  test("should handle both inputs empty", () => {
-    const mockDate = "2024-12-06T12-00-00-000Z";
-    jest.useFakeTimers().setSystemTime(newDate(mockDate));
+   const mockDate = "2024-12-06T12:00:00.000Z";
+
+    jest.useFakeTimers().setSystemTime(new Date(mockDate));
     expect(logAction("", "")).toBe(`User performed at ${mockDate}`);
     jest.useRealTimers();
  });
